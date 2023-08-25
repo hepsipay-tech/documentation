@@ -12,11 +12,7 @@ JavaScript SDK'in kullanılması durumunda [Frame JS Events](#frame-js-event) b�
 
 [https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR\_MERCHANT\_SESSION\_TOKEN](https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR_MERCHANT_SESSION_TOKEN)
 
-### Hepsipay Frame Ekran Görüntüleri:
-
-- <img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-use-stored-card-in-co.jpg" alt="project-screenshot" width="300" height="auto/">
-- <img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-use-wallet-in-co.jpg" alt="project-screenshot" width="300" height="auto/">
-- <img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-use-wallet.jpg" alt="project-screenshot" width="300" height="auto/">
+<img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-mobile-demo-view.png" alt="project-screenshot" width="500" height="auto">
 
 ## 🧐 Özellikleri
 
@@ -72,7 +68,7 @@ desktop çözünürlükte: en az 550px
 ```
 
 # Frame JS Event
-Hepsipay frame [4 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
+Hepsipay frame [5 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
 
 ### Eventler, JavaScript şekilde kontrol edilebilir
 ```js
