@@ -4,10 +4,6 @@
 
 Hepsipay checkout deneyimi ve avantajları her yerde!
 
-Bu dökümantasyon Hepsipay deneyimini JavaScript SDK çözümümüz olmadan kullanımına yöneliktir. 
-
-JavaScript SDK'in kullanılması durumunda [Frame JS Events](#frame-js-event) bölümü ve sonrasına ihtiyaç duymayacaktır
-
 ## 🛠️ Kullanım/Kurulum:
 - [WEB SDK dökümandasyonu](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/web-sdk/README.md)
 - [Hepsipay Mobile(WebView) dökümantasyonu](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/mobile/README.md)
