@@ -110,3 +110,10 @@ function handleMessageEvents(event) {
 - Bu event hepsipay bakiyesini kullanarak ödeme yapmak isteyen kullanıcılardan Hepsipay şifreleri başarılı giriş yaptıktan sonra gönderilir
 - Event'in atılması native iOS ve Android tarafında token'ın alıp storage üzerinde saklanması içindir. Bir sonraki Hepsipay webview açılırken, bu değer, aynı isimle tekrar Webview cookie üzerine yazılması içindir.
 - Bu şekilde kullanıldığı zaman; müşterinin JWT token değer hâlâ geçerli olduğu sürece tekrar Hepsipay bakiyesi ile ödeme yapmak istediğinde yeniden şifre sorulmayacaktır.
+
+## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler (optional);
+WebView açılırken cookie listesine 2 adet değer tanımlanması kullanıcı deneyimini iyileştirecektir
+#### - unique-device-id
+Bu bilgi kullanıcılarının ödeme akışlarında fraud ve 3Ds veya non-3Ds akışa mı girmesi gerektiği kurallarında parametre olarak çalışacaktır. 
+#### - hp-jwt-token
+Bu bilginin kullanım amacı [messageType listesinde](#--hp-jwt-token) belirtilmişti. Uygulama ile cihazda saklanan bu bilgi kullanıcının tekrardan bakiyeli ödemelerde login akışına mâruz kalmaması için talep edilmektedir
