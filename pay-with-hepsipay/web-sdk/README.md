@@ -2,9 +2,16 @@
 
 ## Usage
 
-```es modules
+```html
 
-import HepsipaySdk from "@hepsipay/hp-merchant";
+<body>
+  <!-- ... -->
+  <!-- Latest version -->
+  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js"></script>
+
+  <!-- Specific version (recommended) -->
+  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.1.3.min.js"></script>
+</body>
 
 ```
 
@@ -40,8 +47,8 @@ const arg = {
   frameFailureCallback: callback(),
   /* Handle successful payment */
   onPaymentSuccessCallback: callback(),
-  /* Max height value for frame div, default is set to 600px */
-  maxHeight: "600",
+  /* Max height value for frame div, default is set to 800px */
+  maxHeight: "800",
   /* Resize frame wether is dynamic or static, default is set to false */
   disableDynamicHeight: false
 }
@@ -101,6 +108,3 @@ It is a method that posts *message event* to the frame. Frame will listen and st
     .contentWindow.postMessage(message, '*');
 
 ```
-
-
-
