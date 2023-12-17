@@ -4,7 +4,7 @@
 
 Hepsipay checkout deneyimi ve avantajları her yerde!
 
-Bu dökümantasyon Hepsipay deneyimini JavaScript SDK çözümümüz olmadan kullanımına yöneliktir. 
+Bu dökümantasyon Hepsipay deneyimini JavaScript SDK çözümümüz olmadan kullanımına yöneliktir.
 
 JavaScript SDK'in kullanılması durumunda [Frame JS Events](#frame-js-event) bölümü ve sonrasına ihtiyaç duymayacaktır
 
@@ -25,7 +25,7 @@ Projenin bazı harika özellikleri:
 ## 🛠️ Kullanım/Kurulum:
 
 1. Hepsipay Backend Entegrasyonu
-Hepsipay UI kullanım/testleri öncesinde Backend entegrasyonu tamamlanmalıdır
+   Hepsipay UI kullanım/testleri öncesinde Backend entegrasyonu tamamlanmalıdır
 
 ```
 <*!-- Hepsipay Backend dökümantasyonu ayrıca iletilir -->
@@ -33,7 +33,7 @@ Hepsipay UI kullanım/testleri öncesinde Backend entegrasyonu tamamlanmalıdır
 
 2. Backend entegrasyonu tamamlandığında API'den aşağıdaki gibi response alınır;
 
-```JSON 
+```json 
 {
     "RequestUrl": "https://{{HEPSIPAY_GATEWAY_DNS}}/hepsipayframe/init",
     "Response": {
@@ -48,7 +48,7 @@ Hepsipay UI kullanım/testleri öncesinde Backend entegrasyonu tamamlanmalıdır
 }
 ```
 
-3. Hepsipay frame çözümünü kendi checkout iframe ile kullanmak  
+3. Hepsipay frame çözümünü kendi checkout iframe ile kullanmak
 ```html
 <iframe id="hepsipayFrame" src="{{FrameUrl}}" height="450" width="100%" frameborder="0"></iframe>
 
@@ -70,7 +70,8 @@ desktop çözünürlükte: en az 550px
 # Frame JS Event
 Hepsipay frame [5 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
 
-### Eventler, JavaScript şekilde kontrol edilebilir
+### JavaScript eventleri nasıl kontrol edilebilir?
+*  WEB Platform 
 ```js
 // Tüm hepsipay frame eventleri event.data.messageType şeklinde `messageType: string` değeri taşır 
 window.addEventListener('message', handleMessageEvents);
@@ -86,24 +87,34 @@ function handleMessageEvents(event) {
         // Your business logic goes here
     } 
 }
-
 ```
+* Android Platform (Kotlin)
+```kotlin
+class HepsipayFrameCommunicator(){
+    @JavascriptInterface
+    fun postMessage(message:String){
+        //Received message from webview in native, process data
+    }
+}
+merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFrameCommunicator")
+```
+
 ### messageType listesi;
 #### - hp-payment-success
 - ```event.data = { messageType: 'hp-payment-success' }```
 - Müşteri ödeme sürecini 3Ds ve/veya non 3Ds ile başarıyla tamamladığı bildirilir
-- *Bu event handle edildiği durumda frame'in kapatılması beklenir, yoksa event atıldıktan ön tanımlı bir süre kadar sonrasında [Kullanım/Kurulum 4. adımda](#-kullanımkurulum-) anlatılan aksiyon alınır 
+- *Bu event handle edildiği durumda frame'in kapatılması beklenir, yoksa event atıldıktan ön tanımlı bir süre kadar sonrasında [Kullanım/Kurulum 4. adımda](#-kullanımkurulum-) anlatılan aksiyon alınır
 #### - hp-restart-frame *(handle edilmesi önerilir)*
 - `event.data = {messageType: 'hp-restart-frame'}`
-- Session ile ilgili devam edilemeyecek kritik bir hata oluşmuştur. Bu durumda müşteri işlemine devam edemeyecektir.Yeniden token üretilip iframe yeniden render edilmelidir 
+- Session ile ilgili devam edilemeyecek kritik bir hata oluşmuştur. Bu durumda müşteri işlemine devam edemeyecektir.Yeniden token üretilip iframe yeniden render edilmelidir
 - Bu hata çoğunlukla üretilen SessionToken'ın artık geçerli olmadığı durumda gönderilir
 #### - hp-payment-available-status
 - `event.data = { messageType: 'hp-payment-available-status', isPaymentAllowed: boolean }`
 - `isPaymentAllowed: true` Ödemeyi başlatabilir durumdadır
 - `isPaymentAllowed: false` Ödeme başlatamayacak durumdadır. Çoğunlukla yeni kart form ekranı açtığı için atılır veya alışveriş kredisi sürecindedir
 #### - hp-resize-frame
-- `event.data = { messageType: 'hp-payment-available-status', height: number }`
-- Bu event frame işgal ettiği yükseklik alanı değiştikçe atılır. 
+- `event.data = { messageType: 'hp-resize-frame', height: number }`
+- Bu event frame işgal ettiği yükseklik alanı değiştikçe atılır.
 - Burada gelen `height` değeri direkt olarak <iframe ... height={height}/> şeklinde kullanılarak frame'in yüksekliği dinamik kullanılması sağlanabilir
 #### - hp-jwt-token
 - `event.data = { messageType: 'hp-jwt-token', data: { token: "JWT_TOKEN" } }`
@@ -114,6 +125,6 @@ function handleMessageEvents(event) {
 ## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler (optional);
 WebView açılırken cookie listesine 2 adet değer tanımlanması kullanıcı deneyimini iyileştirecektir
 #### - unique-device-id
-Bu bilgi kullanıcılarının ödeme akışlarında fraud ve 3Ds veya non-3Ds akışa mı girmesi gerektiği kurallarında parametre olarak çalışacaktır. 
+Bu bilgi kullanıcılarının ödeme akışlarında fraud ve 3Ds veya non-3Ds akışa mı girmesi gerektiği kurallarında parametre olarak çalışacaktır.
 #### - hp-jwt-token
 Bu bilginin kullanım amacı [messageType listesinde](#--hp-jwt-token) belirtilmişti. Uygulama ile cihazda saklanan bu bilgi kullanıcının tekrardan bakiyeli ödemelerde login akışına mâruz kalmaması için talep edilmektedir
