@@ -10,7 +10,7 @@
   <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js"></script>
 
   <!-- Specific version (recommended) -->
-  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.1.3.min.js"></script>
+  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.1.min.js"></script>
 </body>
 
 ```
