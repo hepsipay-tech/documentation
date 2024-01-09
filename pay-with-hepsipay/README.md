@@ -5,13 +5,9 @@
 Hepsipay checkout deneyimi ve avantajları her yerde!
 
 ## 🛠️ Kullanım/Kurulum:
-- [WEB SDK dökümandasyonu](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/web-sdk/README.md)
-- [Hepsipay Mobile(WebView) dökümantasyonu](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/mobile/README.md)
-
-## 🚀 Demo
-[https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR\_MERCHANT\_SESSION\_TOKEN](https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR_MERCHANT_SESSION_TOKEN)
-
-<img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-mobile-demo-view.png" alt="project-screenshot" width="500" height="auto">
-
-
-
+- Web/WebView Dökümantasyonu
+  - [WEB SDK](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/web-sdk/README.md)
+  - [Mobile WebView](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/mobile/README.md)
+- Native UI Dökümantasyonu
+  - [iOS](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/ios/README.md)
+  - [Android](https://github.com/pay-with-hepsipay/documentation/blob/main/pay-with-hepsipay/android/README.md)
