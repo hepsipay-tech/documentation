@@ -3,9 +3,9 @@
 # Contents
 - [Integration](#integration)
 - [Initialization](#initialization)
-    1. [PWHPConfig](#pwhpconfig)
-    2. [Container View](#containerview)
-    3. [Initialize](#initialize)
+    - [PWHPConfig](#pwhpconfig)
+    - [Container View](#containerview)
+    - [Initialize](#initialize)
 - [Usage](#usage)
 
 # <a name="integration"> Integration </a>
