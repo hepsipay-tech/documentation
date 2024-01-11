@@ -9,11 +9,60 @@
 - [Usage](#usage)
 
 # <a name="integration"> Integration </a>
-İlgili modülün build.gradle dosyasına belirtilen implementasyonu ekleyin:
+Root **`build.gradle`** dosyasına belirtilen Maven repository tanımlamalarını ekleyin:
+
+```kotlin
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = extra["payWithMavenUrl"] as String) {
+            name = "GitLab"
+            credentials.apply {
+                username = extra["payWithUser"] as String
+                password = extra["payWithPassword"] as String
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+            content {
+                includeGroup("com.hepsiburada.hepsipay")
+            }
+        }
+    }
+}
+```
+
+Eğer projenizde **`settings.gradle`** kullanılıyorsa Maven repository tanımlamalarını belirtilen şekilde yapabilirsiniz:
+
+```kotlin
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = extra["payWithMavenUrl"] as String) {
+            name = "GitLab"
+            credentials.apply {
+                username = extra["payWithUser"] as String
+                password = extra["payWithPassword"] as String
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+            content {
+                includeGroup("com.hepsiburada.hepsipay")
+            }
+        }
+    }
+}
+```
+
+İlgili modülün **`build.gradle`** dosyasına belirtilen implementasyonu ekleyin:
 
 ```kotlin
 dependencies {
-    implementation(project(":paywithhp-ui"))
+    implementation("com.hepsiburada.hepsipay:paywithhp-ui:0.0.1")
 }
 ```
 
