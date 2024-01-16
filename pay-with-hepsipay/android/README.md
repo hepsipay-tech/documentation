@@ -16,17 +16,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(url = extra["payWithMavenUrl"] as String) {
-            name = "GitLab"
-            credentials.apply {
-                username = extra["payWithUser"] as String
-                password = extra["payWithPassword"] as String
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
+        maven(url = "https://images.hepsiburada.net/payment/assets/pwhp-native") {
             content {
-                includeGroup("com.hepsiburada.hepsipay")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-ui")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-domain")
             }
         }
     }
@@ -41,17 +35,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven(url = extra["payWithMavenUrl"] as String) {
-            name = "GitLab"
-            credentials.apply {
-                username = extra["payWithUser"] as String
-                password = extra["payWithPassword"] as String
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
+        maven(url = "https://images.hepsiburada.net/payment/assets/pwhp-native") {
             content {
-                includeGroup("com.hepsiburada.hepsipay")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-ui")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
+                includeModule("com.hepsiburada.hepsipay", "paywithhp-domain")
             }
         }
     }
@@ -62,7 +50,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.hepsiburada.hepsipay:paywithhp-ui:0.0.1")
+    implementation("com.hepsiburada.hepsipay:paywithhp-ui:0.0.3")
 }
 ```
 
