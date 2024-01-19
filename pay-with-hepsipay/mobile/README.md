@@ -117,10 +117,13 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 - Bu event frame işgal ettiği yükseklik alanı değiştikçe atılır.
 - Burada gelen `height` değeri direkt olarak <iframe ... height={height}/> şeklinde kullanılarak frame'in yüksekliği dinamik kullanılması sağlanabilir
 #### - hp-jwt-token
-- `event.data = { messageType: 'hp-jwt-token', data: { token: "JWT_TOKEN" } }`
+- `event.data = { messageType: 'hp-jwt-token', data: { token: "{JWT_TOKEN}" } }`
 - Bu event hepsipay bakiyesini kullanarak ödeme yapmak isteyen kullanıcılardan Hepsipay şifreleri başarılı giriş yaptıktan sonra gönderilir
 - Event'in atılması native iOS ve Android tarafında token'ın alıp storage üzerinde saklanması içindir. Bir sonraki Hepsipay webview açılırken, bu değer, aynı isimle tekrar Webview cookie üzerine yazılması içindir.
 - Bu şekilde kullanıldığı zaman; müşterinin JWT token değer hâlâ geçerli olduğu sürece tekrar Hepsipay bakiyesi ile ödeme yapmak istediğinde yeniden şifre sorulmayacaktır.
+#### - hp-redirect-deeplink
+- `event.data = {"messageType":"hp-redirect-deeplink","deeplinkUrl":"{BROWSER_URL}","appDeeplinkUrl":"{APP_DEEPLINK}", "packageId":"{PLATFORM_PACKAGE_ID}", "storeUrl": "{PLATFORM_STORE_BROWSER_URL}"}`
+- [Event detaylı açıklama için tıklayın](#hp-redirect-deeplink)
 
 ## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler (optional);
 WebView açılırken cookie listesine 2 adet değer tanımlanması kullanıcı deneyimini iyileştirecektir
@@ -128,3 +131,36 @@ WebView açılırken cookie listesine 2 adet değer tanımlanması kullanıcı d
 Bu bilgi kullanıcılarının ödeme akışlarında fraud ve 3Ds veya non-3Ds akışa mı girmesi gerektiği kurallarında parametre olarak çalışacaktır.
 #### - hp-jwt-token
 Bu bilginin kullanım amacı [messageType listesinde](#--hp-jwt-token) belirtilmişti. Uygulama ile cihazda saklanan bu bilgi kullanıcının tekrardan bakiyeli ödemelerde login akışına mâruz kalmaması için talep edilmektedir
+
+## hp-redirect-deeplink
+Bu event, "**Alışveriş Kredisi ile Öde**" yöntemi için **zorunlu** bir adımdır.
+### Event Verisi
+```javascript
+event.data = {
+  "messageType": "hp-redirect-deeplink",
+  "deeplinkUrl": "{BROWSER_URL}",
+  "appDeeplinkUrl": "{APP_DEEPLINK}",
+  "packageId": "{PLATFORM_PACKAGE_ID}",
+  "storeUrl": "{PLATFORM_STORE_BROWSER_URL}"
+}
+```
+#### Açıklama
+iOS Safari tarayıcısının iframe güvenlik politikaları, yeni bir sekme açma veya deeplink protokollerini çalıştırma yeteneğini kısıtlar. Bu nedenle, Alışveriş Kredisi ile Hepsipay native ekranlarına yönlendirme işlemi sadece **hp-redirect-deeplink** eventi kullanılarak gerçekleştirilebilir.
+#### Kullanım Koşulları
+- Event'in kontrol edilmesi için ilk olarak frame tarafına **hp-redirect-deeplink-handled** eventi geri döndürülmesi gereklidir. Bu sayede frame, ek bir aksiyon almadan statü kontrol aşamasına geçecektir.
+- Web platformunda, event içindeki deeplinkUrl, yeni bir sekme içinde açılmalıdır.
+- Native Application Webview kullanımında ise öncelikle appDeeplinkUrl, native seviyede açılmaya çalışılmalıdır. Eğer bu başarısız olursa, packageId ile belirtilen uygulama, ilgili app/play store üzerinde açılmalıdır.
+#### Web Platform Örnek Kullanım
+```js
+// Event kontrolü ve geri bildirim
+window.addEventListener('message', function (event) {
+  if (event.data.messageType === 'hp-redirect-deeplink') {
+    // hp-redirect-deeplink-handled eventi ile kontrolü geri bildir
+    iframeElement.contentWindow.postMessage({ messageType: 'hp-redirect-deeplink-handled' }, '*');
+
+    // Web platformunda yeni sekme açma
+    window.open(event.data.deeplinkUrl, '_blank');
+  }
+});
+
+```
