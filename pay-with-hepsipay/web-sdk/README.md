@@ -7,10 +7,10 @@
 <body>
   <!-- ... -->
   <!-- Latest version -->
-  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js"></script>
+  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js'></script>
 
   <!-- Specific version (recommended) -->
-  <script src="https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.1.min.js"></script>
+  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.2.min.js'></script>
 </body>
 
 ```
@@ -35,9 +35,9 @@ HepsipaySdk.init(initOptions)
 - onPaymentSuccessCallback
 - maxHeight
 - disableDynamicHeight
+- showFramePaymentButton
 
 ```js
-
 const arg = {
   frameUrl: 'frameUrl',
   frameDivId: 'divIdForShowingFrame',
@@ -46,13 +46,15 @@ const arg = {
   /* Handle frame related errors */
   frameFailureCallback: callback(),
   /* Handle successful payment */
-  onPaymentSuccessCallback: callback(),
+  onPaymentSuccessCallback: callback(payload: {MerchantOrderNumber: string, token: string}),
   /* Max height value for frame div, default is set to 800px */
   maxHeight: "800",
   /* Resize frame wether is dynamic or static, default is set to false */
-  disableDynamicHeight: false
-}
+  disableDynamicHeight: false,
+  /* Show in-frame payment button, default is set to false */
+  showFramePaymentButton: false,
 
+}
 ```
 
 *init* method uses two callbacks for checking payment status and handling frame failures.
