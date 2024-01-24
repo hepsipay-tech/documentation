@@ -36,6 +36,7 @@ HepsipaySdk.init(initOptions)
 - maxHeight
 - disableDynamicHeight
 - showFramePaymentButton
+- useApiCallOnSuccessCallback
 
 ```js
 const arg = {
@@ -53,7 +54,13 @@ const arg = {
   disableDynamicHeight: false,
   /* Show in-frame payment button, default is set to false */
   showFramePaymentButton: false,
-
+  /**
+  * In the BE frame-init integration, the `MerchantCallbackUrl` address defined;
+  * If `true`, the API call uses the POST request method (application/json).
+  * If `false`, the form-post method (application/x-www-form-urlencoded) is used.
+  * Default: false
+  */
+  useApiCallOnSuccessCallback: false,
 }
 ```
 
