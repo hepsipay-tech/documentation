@@ -68,7 +68,7 @@ desktop çözünürlükte: en az 550px
 ```
 
 # Frame JS Event
-Hepsipay frame [5 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
+Hepsipay frame [6 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
 
 ### JavaScript eventleri nasıl kontrol edilebilir?
 *  WEB Platform 
@@ -101,7 +101,7 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 
 ### messageType listesi;
 #### - hp-payment-success
-- ```event.data = { messageType: 'hp-payment-success' }```
+- ```event.data = { messageType: 'hp-payment-success', merchantOrderNumber: string; token: string }```
 - Müşteri ödeme sürecini 3Ds ve/veya non 3Ds ile başarıyla tamamladığı bildirilir
 - *Bu event handle edildiği durumda frame'in kapatılması beklenir, yoksa event atıldıktan ön tanımlı bir süre kadar sonrasında [Kullanım/Kurulum 4. adımda](#-kullanımkurulum-) anlatılan aksiyon alınır
 #### - hp-restart-frame *(handle edilmesi önerilir)*
@@ -117,12 +117,12 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 - Bu event frame işgal ettiği yükseklik alanı değiştikçe atılır.
 - Burada gelen `height` değeri direkt olarak <iframe ... height={height}/> şeklinde kullanılarak frame'in yüksekliği dinamik kullanılması sağlanabilir
 #### - hp-jwt-token
-- `event.data = { messageType: 'hp-jwt-token', data: { token: "{JWT_TOKEN}" } }`
+- `event.data = { messageType: 'hp-jwt-token', token: string }`
 - Bu event hepsipay bakiyesini kullanarak ödeme yapmak isteyen kullanıcılardan Hepsipay şifreleri başarılı giriş yaptıktan sonra gönderilir
 - Event'in atılması native iOS ve Android tarafında token'ın alıp storage üzerinde saklanması içindir. Bir sonraki Hepsipay webview açılırken, bu değer, aynı isimle tekrar Webview cookie üzerine yazılması içindir.
 - Bu şekilde kullanıldığı zaman; müşterinin JWT token değer hâlâ geçerli olduğu sürece tekrar Hepsipay bakiyesi ile ödeme yapmak istediğinde yeniden şifre sorulmayacaktır.
 #### - hp-redirect-deeplink
-- `event.data = {"messageType":"hp-redirect-deeplink","deeplinkUrl":"{BROWSER_URL}","appDeeplinkUrl":"{APP_DEEPLINK}", "packageId":"{PLATFORM_PACKAGE_ID}", "storeUrl": "{PLATFORM_STORE_BROWSER_URL}"}`
+- `event.data = {messageType: 'hp-redirect-deeplink', deeplinkUrl: '{BROWSER_URL}', appDeeplinkUr: '{APP_DEEPLINK}', packageId: '{PLATFORM_PACKAGE_ID}', storeUrl: '{PLATFORM_STORE_BROWSER_URL}'}`
 - [Event detaylı açıklama için tıklayın](#hp-redirect-deeplink)
 
 ## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler (optional);
