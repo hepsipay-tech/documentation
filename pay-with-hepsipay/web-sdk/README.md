@@ -10,7 +10,7 @@
   <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js'></script>
 
   <!-- Specific version (recommended) -->
-  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.3.min.js'></script>
+  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.4.min.js'></script>
 </body>
 
 ```
@@ -61,6 +61,16 @@ const arg = {
   * Default: false
   */
   useApiCallOnSuccessCallback: false,
+  /**
+  * Payload object for relevant payment types;
+  * When "Kart İle Öde" selected
+  * @param { actualInstallmentNumber: number, displayInstallmentNumber: number, binNumber: string, paymentType: string }
+  * When "Hepsipay Bakiyem İle Öde" selected
+  * @param { binNumber: string, paymentType: string }
+  * When "Hızlı alışveriş kredisi ile öde" selected
+  * @param { paymentType: string }
+  */
+  selectedPaymentInfoCallback: callback(payload)
 }
 ```
 
