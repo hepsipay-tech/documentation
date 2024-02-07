@@ -12,7 +12,7 @@ JavaScript SDK'in kullanılması durumunda [Frame JS Events](#frame-js-event) b�
 
 [https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR\_MERCHANT\_SESSION\_TOKEN](https://pf-ui-pwh-qa.hepsipay.com/?token=YOUR_MERCHANT_SESSION_TOKEN)
 
-<img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-mobile-demo-view.png" alt="project-screenshot" width="500" height="auto">
+<img src="https://images.hepsiburada.net/hepsipay/img/demo/pwh-demo-view.png" alt="project-screenshot" width="700" height="auto">
 
 ## 🧐 Özellikleri
 
