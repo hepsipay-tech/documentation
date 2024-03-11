@@ -59,12 +59,11 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
             self.payButton.isUserInteractionEnabled = isPaymentAvailable
             self.payButton.setBackgroundColor(isPaymentAvailable ? .accent : .gray)
         },
-        paymentCompleteHandler: { isPaymentSuccess, paymentOption in
-            if isPaymentSuccess {
-                let successVC = PaymentFinishViewController()
-                successVC.paymentOption = paymentOption
-                self.navigationController?.pushViewController(successVC, animated: true)
-            }
+        paymentCompleteHandler: { paymentResult in
+            let successVC = PaymentSuccessViewController()
+            // Payment Result Contains: paymentOption, orderNumber, token, merchantCallbackURL
+            successVC.paymentResult = paymentResult
+            self.navigationController?.pushViewController(successVC, animated: true)
         }
     )
 )
@@ -75,9 +74,12 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
 - **`uniqueDeviceId: String?`**: Merchant tarafından verilen unique device id. (Opsiyonel)
 - **`paymentAvailableHandler`**: Ödeme yapabilme durumunun değiştiği durumlarda buraya düşer.
   - **`isPaymentAvailable: Bool`**: true ise ödeme yapabilir, false ise yapmamalıdır. Merchant tarafında bulunan **Ödeme Yap** butonu bu değere göre aktif/pasif edilir.
-- **`paymentCompleteHandler`**: Ödeme tamamlandıktan sonra buraya düşer.
-  -  **`isPaymentSuccess: Bool`**: Ödemenin başarılı/başarısız gerçekleştiği bilgisi
-  -  **`paymentOption: OptionType`**: Ödemenin hangi seçenekle yapıldığı bilgisi. (Wallet, Card, Loan)
+- **`paymentCompleteHandler`**: Ödeme başarılı olarak tamamlandıktan sonra buraya düşer.
+  -  **`paymentResult`**: Ödeme sonucuna ait aşağıdaki bilgileri içerir.
+      -  **`paymentOption: OptionType`**: Ödemenin hangi seçenekle yapıldığı bilgisi. (Wallet, Card, Loan)
+      -  **`orderNumber: String`**: Sipariş numarası
+      -  **`token: String`**: Kullanılan token bilgisi
+      -  **`merchantCallbackURL: String`**: WebView içerisine bu URL verilerek success ekranı gösterilebilir.
 
 
 # <a name="usage">Usage</a>
