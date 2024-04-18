@@ -15,9 +15,20 @@ Projenizde `Package.swift` kullanıyorsanız Package dependencies kısmına aşa
 ```swift
 dependencies: [
     ...
-    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.0")
+    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.1")
 ]
 ```
+- Kullanıcı adı:`hepsipay`
+- Şifre: Size özel ilettiğimiz access token
+
+Kullanıcı adı şifre bilgilerini giremediğiniz bir durum oluşursa (Örneğin pipeline makineleri için) kullanıcı adı ve şifre bilgisini URL içerisine aşağıdaki gibi yazabilirsiniz.
+```swift
+dependencies: [
+    ...
+    .package(url: "https://hepsipay:YourAccessToken@gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.1")
+]
+```
+
 Kullanacağınız target için dependencies kısmına ekleme yapın.
 ```swift
 .target(
@@ -53,8 +64,13 @@ import PayWithHPFramework
 ```swift
 let payWithHPView = PayWithHPManager.getPayWithHPView(
     model: .init(
+        environment: .qa,
         token: "MERCHANT_TOKEN",
         uniqueDeviceId: "UNIQUE_DEVICE_ID",
+        style: .init(
+            edgeInsets: .init(top: 16, left: 16, bottom: 16, right: 16),
+            overrideFontFamily: "Quicksand"
+        ),
         paymentAvailableHandler: { isPaymentAvailable in
             self.payButton.isUserInteractionEnabled = isPaymentAvailable
             self.payButton.setBackgroundColor(isPaymentAvailable ? .accent : .gray)
@@ -70,8 +86,12 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
 ```
 
 **Model Parametreleri**
+- **`environment: EnvironmentType`**: Ortam bilgisi (qa: Alt ortam, prod: Canlı ortam)
 - **`token: String`**: Hepsipay token
-- **`uniqueDeviceId: String?`**: Merchant tarafından verilen unique device id. (Opsiyonel)
+- **`uniqueDeviceId: String?`**: Merchant tarafından verilen unique device id. (Optional)
+- **`style: Style?`**: Stile ait özellikler bu struct içerisine verilir.
+  -  **`edgeInsets: UIEdgeInsets`**: Dönülecek view için inset değeri (`Default: top: 16, left: 16, bottom: 16, right: 16`)
+  -  **`overrideFontFamily: String?`**: Varsayılan olarak kullanılan `Inter` font family'i override eder (`Default: nil`). X font family için şu ttf dosyaları projeniz içerisinde bulunmalıdır: **`X-Bold.ttf, X-Medium.ttf, X-Regular.ttf, X-SemiBold.ttf`**
 - **`paymentAvailableHandler`**: Ödeme yapabilme durumunun değiştiği durumlarda buraya düşer.
   - **`isPaymentAvailable: Bool`**: true ise ödeme yapabilir, false ise yapmamalıdır. Merchant tarafında bulunan **Ödeme Yap** butonu bu değere göre aktif/pasif edilir.
 - **`paymentCompleteHandler`**: Ödeme başarılı olarak tamamlandıktan sonra buraya düşer.
