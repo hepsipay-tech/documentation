@@ -64,11 +64,11 @@ const arg = {
   /**
   * Payload object for relevant payment types;
   * When "Kart İle Öde" selected
-  * @param { actualInstallmentNumber: number, displayInstallmentNumber: number, binNumber: string, paymentType: string }
+  * @param { amount: number, actualInstallmentNumber: number, displayInstallmentNumber: number, binNumber: string, paymentType: string }
   * When "Hepsipay Bakiyem İle Öde" selected
-  * @param { binNumber: string, paymentType: string }
+  * @param { amount: number, binNumber: string, paymentType: string }
   * When "Hızlı alışveriş kredisi ile öde" selected
-  * @param { paymentType: string }
+  * @param { amount: number, paymentType: string }
   */
   selectedPaymentInfoCallback: callback(payload)
 }
