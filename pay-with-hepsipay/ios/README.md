@@ -15,7 +15,7 @@ Projenizde `Package.swift` kullanıyorsanız Package dependencies kısmına aşa
 ```swift
 dependencies: [
     ...
-    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.1")
+    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.4")
 ]
 ```
 - Kullanıcı adı:`hepsipay`
@@ -25,7 +25,7 @@ Kullanıcı adı şifre bilgilerini giremediğiniz bir durum oluşursa (Örneği
 ```swift
 dependencies: [
     ...
-    .package(url: "https://hepsipay:YourAccessToken@gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.1")
+    .package(url: "https://hepsipay:YourAccessToken@gitea.com/hepsipay/PayWithHPSPM.git", from: "1.0.4")
 ]
 ```
 
@@ -101,6 +101,14 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
       -  **`token: String`**: Kullanılan token bilgisi
       -  **`merchantCallbackURL: String`**: WebView içerisine bu URL verilerek success ekranı gösterilebilir.
 
+
+**Alışveriş kredisi ile öde** seçeneği ile ilerlendiğinde Hepsiburada uygulaması deeplink ile başlatılacaktır. Bunun için uygulamanızın `Info.plist` dosyası içerisine `Queried URL Schemes` dizisine **`hbapp`** değeri eklenmelidir.
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>hbapp</string>
+</array>
+```
 
 # <a name="usage">Usage</a>
 
