@@ -10,7 +10,7 @@
   <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js'></script>
 
   <!-- Specific version (recommended) -->
-  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.6.min.js'></script>
+  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.7.min.js'></script>
 </body>
 
 ```
@@ -37,6 +37,8 @@ HepsipaySdk.init(initOptions)
 - disableDynamicHeight
 - showFramePaymentButton
 - useApiCallOnSuccessCallback
+- overrideFontFamily
+- hideHeader
 
 ```js
 const arg = {
@@ -70,7 +72,11 @@ const arg = {
   * When "Hızlı alışveriş kredisi ile öde" selected
   * @param { amount: number, paymentType: string }
   */
-  selectedPaymentInfoCallback: callback(payload)
+  selectedPaymentInfoCallback: callback(payload),
+  /* You can define the google font you want to use. Default: Inter */
+  overrideFontFamily: "Inter",
+  /* Allows hide/show control of the Hepsipay logo header area: Default: false */
+  hideHeader: false,
 }
 ```
 
