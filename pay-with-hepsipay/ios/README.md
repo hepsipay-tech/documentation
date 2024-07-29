@@ -69,7 +69,8 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
         uniqueDeviceId: "UNIQUE_DEVICE_ID",
         style: .init(
             edgeInsets: .init(top: 16, left: 16, bottom: 16, right: 16),
-            overrideFontFamily: "Quicksand"
+            overrideFontFamily: "Quicksand",
+            hideHeader: false
         ),
         paymentAvailableHandler: { isPaymentAvailable in
             self.payButton.isUserInteractionEnabled = isPaymentAvailable
@@ -92,6 +93,7 @@ let payWithHPView = PayWithHPManager.getPayWithHPView(
 - **`style: Style?`**: Stile ait özellikler bu struct içerisine verilir.
   -  **`edgeInsets: UIEdgeInsets`**: Dönülecek view için inset değeri (`Default: top: 16, left: 16, bottom: 16, right: 16`)
   -  **`overrideFontFamily: String?`**: Varsayılan olarak kullanılan `Inter` font family'i override eder (`Default: nil`). X font family için şu ttf dosyaları projeniz içerisinde bulunmalıdır: **`X-Bold.ttf, X-Medium.ttf, X-Regular.ttf, X-SemiBold.ttf`**
+  -  **`hideHeader: Bool`**: Varsayılan olarak false değeri kullanılır. Eğer başlık alanının görünmesi istenmiyor ise true gönderilmelidir.
 - **`paymentAvailableHandler`**: Ödeme yapabilme durumunun değiştiği durumlarda buraya düşer.
   - **`isPaymentAvailable: Bool`**: true ise ödeme yapabilir, false ise yapmamalıdır. Merchant tarafında bulunan **Ödeme Yap** butonu bu değere göre aktif/pasif edilir.
 - **`paymentCompleteHandler`**: Ödeme başarılı olarak tamamlandıktan sonra buraya düşer.
