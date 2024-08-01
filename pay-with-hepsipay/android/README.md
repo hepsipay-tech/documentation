@@ -71,37 +71,62 @@ SDK arayüzünün gösteriminin sağlanacağı kısımda bir Compose View oluşt
 ```
 
 ### <a name="initialize">2. Initialize</a>
+PaymentActionState için bir Flow tanımlayın:
+
+```kotlin
+class CheckoutViewModel : ViewModel() {
+
+    private val _paymentActionState = MutableStateFlow<PaymentActionState>(PaymentActionState.None)
+    val paymentActionState get() = _paymentActionState.asStateFlow()
+
+    fun updatePaymentActionState(state: PaymentActionState) {
+        _paymentActionState.update {
+            state
+        }
+    }
+
+}
+```
+
 Compose View tanımlamalarını gösterildiği şekilde yapın:
 
 ```kotlin
-
-// View Model içerisindeki PaymentActionState Flow değeri
-// Örn: MutableStateFlow<PaymentActionState>(PaymentActionState.None)
-val paymentActionState = viewModel.paymentActionState.collectAsStateWithLifecycle()
-
-PWHPTheme {
-  PWHPView(
-    modifier = Modifier.padding(16.dp),
-    token = "MERCHANT_TOKEN",
-    hideHeader = false,
-    uniqueDeviceId = "UNIQUE_DEVICE_ID",
-    environment = Environment.TEST,
-    paymentActionState = paymentActionState.value,
-    onPaymentActionStateChanged = viewModel::updatePaymentActionState,
-    onResult = { result ->
-      when (result) {
-        is PWHPResult.PaymentAvailable -> {
-          // Arayüzde bulunan "Ödemeyi Tamamla" butonu
-          binding.btnMakePayment.isEnabled = result.isAvailable
-        }
-
-        is PWHPResult.CompletePayment -> {
-          // Payment flow completed
-          // Result: Callback URL, Order Number, Token
-        }
-      }
-    }
+binding.composeViewPwhp.apply {
+  setViewCompositionStrategy(
+    ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed,
   )
+  
+  setContent {
+      
+    // View Model içerisindeki PaymentActionState Flow değeri
+    // Örn: MutableStateFlow<PaymentActionState>(PaymentActionState.None)
+    val paymentActionState = viewModel.paymentActionState.collectAsStateWithLifecycle()
+
+    PWHPTheme {
+        PWHPView(
+            modifier = Modifier.padding(16.dp),
+            token = "MERCHANT_TOKEN",
+            hideHeader = false,
+            uniqueDeviceId = "UNIQUE_DEVICE_ID",
+            environment = Environment.TEST,
+            paymentActionState = paymentActionState.value,
+            onPaymentActionStateChanged = viewModel::updatePaymentActionState,
+            onResult = { result ->
+                when (result) {
+                    is PWHPResult.PaymentAvailable -> {
+                        // Arayüzde bulunan "Ödemeyi Tamamla" butonu
+                        binding.btnMakePayment.isEnabled = result.isAvailable
+                    }
+
+                    is PWHPResult.CompletePayment -> {
+                        // Payment flow completed
+                        // Result: Callback URL, Order Number, Token
+                    }
+                }
+            }
+        )
+    }
+  }
 }
 ```
 
