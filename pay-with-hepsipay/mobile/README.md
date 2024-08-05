@@ -101,7 +101,7 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 
 ### messageType listesi;
 #### - hp-payment-success
-- ```event.data = { messageType: 'hp-payment-success', merchantOrderNumber: string; token: string }```
+- ```event.data = { messageType: 'hp-payment-success', merchantOrderNumber: string; merchantCallBackUrl: string; token: string }```
 - Müşteri ödeme sürecini 3Ds ve/veya non 3Ds ile başarıyla tamamladığı bildirilir
 - *Bu event handle edildiği durumda frame'in kapatılması beklenir, yoksa event atıldıktan ön tanımlı bir süre kadar sonrasında [Kullanım/Kurulum 4. adımda](#-kullanımkurulum-) anlatılan aksiyon alınır
 #### - hp-restart-frame *(handle edilmesi önerilir)*
