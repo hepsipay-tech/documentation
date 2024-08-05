@@ -49,7 +49,7 @@ const arg = {
   /* Handle frame related errors */
   frameFailureCallback: callback(),
   /* Handle successful payment */
-  onPaymentSuccessCallback: callback(payload: {MerchantOrderNumber: string, token: string}),
+  onPaymentSuccessCallback: callback(payload: {MerchantOrderNumber: string, merchantCallBackUrl: string, token: string}),
   /* Max height value for frame div, default is set to 800px */
   maxHeight: "800",
   /* Resize frame wether is dynamic or static, default is set to false */
