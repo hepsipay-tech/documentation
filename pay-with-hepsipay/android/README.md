@@ -54,7 +54,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.hepsiburada.hepsipay:paywithhp-ui-compose:0.0.3")
+    implementation("com.hepsiburada.hepsipay:paywithhp-ui-compose:1.1.1")
 }
 ```
 
@@ -108,6 +108,11 @@ binding.composeViewPwhp.apply {
             token = "MERCHANT_TOKEN",
             hideHeader = false,
             uniqueDeviceId = "UNIQUE_DEVICE_ID",
+            networkInterceptors = listOf(
+              HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+              }
+            ),
             environment = Environment.TEST,
             paymentActionState = paymentActionState.value,
             onPaymentActionStateChanged = viewModel::updatePaymentActionState,
@@ -135,6 +140,8 @@ binding.composeViewPwhp.apply {
 **`hideHeader: Boolean`** değerini belirleyin. Hepsipay logolu header gizlenebilir. **(Optional)** *(Default: false)*
 
 **`uniqueDeviceId: String?`** benzersiz bir cihaz kimliği belirleyin. **(Optional)**
+
+**`networkInterceptors: List<Interceptor>`** liste halinde interceptor belirleyin. **(Optional)** *(Default: emptyList())*
 
 **`environment: Environment`** test veya production ortamını tanımlayın. **(Optional)** *(Default: Environment.TEST)*
 
