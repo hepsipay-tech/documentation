@@ -10,7 +10,7 @@
   <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js'></script>
 
   <!-- Specific version (recommended) -->
-  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.2.8.min.js'></script>
+  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.3.0.min.js'></script>
 </body>
 
 ```
@@ -32,6 +32,7 @@ HepsipaySdk.init(initOptions)
 - frameDivId
 - paymentStatusCallback
 - frameFailureCallback
+- onPaymentFailureLogCallback
 - onPaymentSuccessCallback
 - maxHeight
 - disableDynamicHeight
@@ -48,6 +49,8 @@ const arg = {
   paymentStatusCallback: callback(isPaymentAllowed),
   /* Handle frame related errors */
   frameFailureCallback: callback(),
+ /* Handle payment failures */
+  onPaymentFailureLogCallback: callback(payload: {userMessage: string, userMessageTitle: string, message: string, messageCode: string, isBankError: boolean}),
   /* Handle successful payment */
   onPaymentSuccessCallback: callback(payload: {MerchantOrderNumber: string, merchantCallBackUrl: string, token: string}),
   /* Max height value for frame div, default is set to 800px */
