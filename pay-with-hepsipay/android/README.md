@@ -20,7 +20,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(url = "https://images.hepsiburada.net/payment/assets/pwhp-native") {
+        maven(url = "https://images.hepsipay.com/payment-assets/www/pwhp-native") {
             content {
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-ui-compose")
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
@@ -39,7 +39,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven(url = "https://images.hepsiburada.net/payment/assets/pwhp-native") {
+        maven(url = "https://images.hepsipay.com/payment-assets/www/pwhp-native") {
             content {
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-ui-compose")
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
@@ -54,7 +54,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.hepsiburada.hepsipay:paywithhp-ui-compose:1.1.1")
+    implementation("com.hepsiburada.hepsipay:paywithhp-ui-compose:1.1.3")
 }
 ```
 
@@ -124,8 +124,20 @@ binding.composeViewPwhp.apply {
                     }
 
                     is PWHPResult.CompletePayment -> {
-                        // Payment flow completed
-                        // Result: Callback URL, Order Number, Token
+                        // Ödeme işlemi başarıyla tamamlanmıştır
+                        // Result Data 
+                        // callbackUrl: String,
+                        // orderNumber: String,
+                        // token: String
+                    }
+
+                    is PWHPResult.PaymentFailureLog -> {
+                        // Ödeme işlemi başarısız olmuştur
+                        // Result Data 
+                        // messageCode: String,
+                        // message: String,
+                        // userMessageTitle: String,
+                        // userMessage: String
                     }
                 }
             }
@@ -153,6 +165,8 @@ binding.composeViewPwhp.apply {
 Ödeme işlemleri tamamlandığında tetiklenir. Result içerisinde `calllbackUrl`, `token` ve `orderNumber` döndürülür. Burada success ekranı gösterilebilir.
 #### PWHPResult.PaymentAvailable
 Mevcut durumda ödeme yapılıp yapılamayacağının bilgisini verir. Arayüzde **"Ödemeyi Tamamla"** gibi bir buton varsa **enabled/disabled** ayarı bu bilgiye göre yapılmalıdır.
+#### PWHPResult.PaymentFailureLog
+Ödeme işlemi başarısız olduğunda tetiklenir. Result içerisinde `messageCode`, `message`, `userMessageTitle` ve `userMessage` döndürülür.
 
 # <a name="usage">Usage</a>
 Ödeme işlemlerinin tamamlanması için bir Flow üzerinde tutulan PaymentActionState değeri MakePayment olarak güncellenmelidir.
