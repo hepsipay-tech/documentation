@@ -20,7 +20,8 @@ Projenin bazı harika özellikleri:
 
 *   Kartla öde
 *   Hepsipay hesabımla öde
-*   Alışveriş kredisi ile öde
+*   Hızlı alışveriş kredisi ile öde
+*   Hepsifinans ile öde
 
 ## 🛠️ Kullanım/Kurulum:
 
