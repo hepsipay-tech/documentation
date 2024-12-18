@@ -74,6 +74,8 @@ const arg = {
   * @param { amount: number, binNumber: string, paymentType: string }
   * When "Hızlı alışveriş kredisi ile öde" selected
   * @param { amount: number, paymentType: string }
+  * When "Hepsifinans ile öde" selected
+  * @param { amount: number, paymentType: string }
   */
   selectedPaymentInfoCallback: callback(payload),
   /* You can define the google font you want to use. Default: Inter */
