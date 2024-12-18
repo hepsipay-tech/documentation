@@ -71,7 +71,7 @@ desktop çözünürlükte: en az 550px
 Hepsipay frame [6 farklı event](#messagetype-listesi) gönderir. Bunların tamamı, ihtiyaca bağlı entegre olunabilecek eventlerdir;
 
 ### JavaScript eventleri nasıl kontrol edilebilir?
-*  WEB Platform 
+*  WEB Platform
 ```js
 // Tüm hepsipay frame eventleri event.data.messageType şeklinde `messageType: string` değeri taşır 
 window.addEventListener('message', handleMessageEvents);
@@ -105,7 +105,7 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 - Müşteri ödeme sürecini 3Ds ve/veya non 3Ds ile başarıyla tamamladığı bildirilir
 - *Bu event handle edildiği durumda frame'in kapatılması beklenir, yoksa event atıldıktan ön tanımlı bir süre kadar sonrasında [Kullanım/Kurulum 4. adımda](#-kullanımkurulum-) anlatılan aksiyon alınır
 #### - hp-restart-frame *(handle edilmesi önerilir)*
-- `event.data = {messageType: 'hp-restart-frame'}`
+- `event.data = { messageType: 'hp-restart-frame' }`
 - Session ile ilgili devam edilemeyecek kritik bir hata oluşmuştur. Bu durumda müşteri işlemine devam edemeyecektir.Yeniden token üretilip iframe yeniden render edilmelidir
 - Bu hata çoğunlukla üretilen SessionToken'ın artık geçerli olmadığı durumda gönderilir
 #### - hp-payment-available-status
@@ -121,11 +121,23 @@ merchantWebview.addJavascriptInterface(HepsipayFrameCommunicator(),"HepsipayFram
 - Bu event hepsipay bakiyesini kullanarak ödeme yapmak isteyen kullanıcılardan Hepsipay şifreleri başarılı giriş yaptıktan sonra gönderilir
 - Event'in atılması native iOS ve Android tarafında token'ın alıp storage üzerinde saklanması içindir. Bir sonraki Hepsipay webview açılırken, bu değer, aynı isimle tekrar Webview cookie üzerine yazılması içindir.
 - Bu şekilde kullanıldığı zaman; müşterinin JWT token değer hâlâ geçerli olduğu sürece tekrar Hepsipay bakiyesi ile ödeme yapmak istediğinde yeniden şifre sorulmayacaktır.
+#### - hp-selected-payment-info
+- `event.data = { messageType: 'hp-selected-payment-info', paymentType: string, amount: number, binNumber?: string, actualInstallmentNumber?: number, displayInstallmentNumber?: number }`
+* Payload object for relevant payment types;
+* When "Kart İle Öde" selected
+  * `{ amount: number, actualInstallmentNumber: number, displayInstallmentNumber: number, binNumber: string, paymentType: string }`
+* When "Hepsipay Bakiyem İle Öde" selected
+  * `{ amount: number, binNumber: string, paymentType: string }`
+* When "Hızlı alışveriş kredisi ile öde" selected
+  * `{ amount: number, paymentType: string }`
+* When "Hepsifinans ile öde" selected
+  * `{ amount: number, paymentType: string }`
 #### - hp-redirect-deeplink
-- `event.data = {messageType: 'hp-redirect-deeplink', deeplinkUrl: '{BROWSER_URL}', appDeeplinkUr: '{APP_DEEPLINK}', packageId: '{PLATFORM_PACKAGE_ID}', storeUrl: '{PLATFORM_STORE_BROWSER_URL}'}`
+- `event.data = { messageType: 'hp-redirect-deeplink', deeplinkUrl: '{BROWSER_URL}', appDeeplinkUr: '{APP_DEEPLINK}', packageId: '{PLATFORM_PACKAGE_ID}', storeUrl: '{PLATFORM_STORE_BROWSER_URL}' }`
 - [Event detaylı açıklama için tıklayın](#hp-redirect-deeplink)
 
-## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler (optional);
+
+## (ONLY-APP) Uygulama içerisinden WebView açılırken istenenler;
 WebView açılırken cookie listesine 2 adet değer tanımlanması kullanıcı deneyimini iyileştirecektir
 #### - unique-device-id
 Bu bilgi kullanıcılarının ödeme akışlarında fraud ve 3Ds veya non-3Ds akışa mı girmesi gerektiği kurallarında parametre olarak çalışacaktır.
