@@ -7,10 +7,10 @@
 <body>
   <!-- ... -->
   <!-- Latest version -->
-  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-latest.min.js'></script>
+  <script src='https://images.hepsipay.com/checkout/packages/hepsipay-latest.min.js'></script>
 
   <!-- Specific version (recommended) -->
-  <script src='https://images.hepsiburada.net/hepsipay/packages/pf/hepsipay-0.3.1.min.js'></script>
+  <script src='https://images.hepsipay.com/checkout/packages/hepsipay-0.3.2.min.js'></script>
 </body>
 
 ```
@@ -66,6 +66,12 @@ const arg = {
   * Default: false
   */
   useApiCallOnSuccessCallback: false,
+  /**
+  * In the BE frame-init integration, the `MerchantCallbackUrl` address defined;
+  * If `true`, MerchantCallbackUrl will not be triggered.
+  * Default: false
+  */
+  disableCallbackUrl: false,
   /**
   * Payload object for relevant payment types;
   * When "Kart İle Öde" selected
