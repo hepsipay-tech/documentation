@@ -20,7 +20,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven(url = "https://images.hepsipay.com/payment-assets/www/pwhp-native") {
+        maven(url = "https://images.hepsipay.com/checkout") {
             content {
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-ui-compose")
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
@@ -39,7 +39,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven(url = "https://images.hepsipay.com/payment-assets/www/pwhp-native") {
+        maven(url = "https://images.hepsipay.com/checkout") {
             content {
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-ui-compose")
                 includeModule("com.hepsiburada.hepsipay", "paywithhp-data")
