@@ -1,5 +1,10 @@
 PWHP iOS
 
+
+[1.3.0] - 2025-03-19
+**feat**: Non-Hb / Non-Hp akışları kullanıma açıldı.
+**fix**: Metric kayıtlarında tablo isim hatası giderildi.
+
 [1.2.2] - 2025-03-14
 
 **feat**: Metric eventleri güncellendi ve kapsamı genişletildi.
