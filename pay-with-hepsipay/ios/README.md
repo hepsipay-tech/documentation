@@ -15,7 +15,7 @@ Projenizde `Package.swift` kullanıyorsanız Package dependencies kısmına aşa
 ```swift
 dependencies: [
     ...
-    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.2.2")
+    .package(url: "https://gitea.com/hepsipay/PayWithHPSPM.git", from: "1.3.0")
 ]
 ```
 - Kullanıcı adı:`hepsipay`
@@ -25,7 +25,7 @@ Kullanıcı adı şifre bilgilerini giremediğiniz bir durum oluşursa (Örneği
 ```swift
 dependencies: [
     ...
-    .package(url: "https://hepsipay:YourAccessToken@gitea.com/hepsipay/PayWithHPSPM.git", from: "1.2.2")
+    .package(url: "https://hepsipay:YourAccessToken@gitea.com/hepsipay/PayWithHPSPM.git", from: "1.3.0")
 ]
 ```
 
