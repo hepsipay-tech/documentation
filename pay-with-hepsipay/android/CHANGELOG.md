@@ -1,6 +1,17 @@
 PWHP
 Android
 
+### [1.2.0] - 2025-03-20
+
+- **feat**: Common Payment işlevi eklendi.
+- **feat**: Yeni kampanya görünümü eklendi.
+- **feat**: Text içerisindeki URL renklendirmeleri değiştirildi.
+- **feat**: Linkleme ekranındaki bilgilendirme mesajına hyper link eklendi.
+- **feat**: Ödeme seçenekleri ekranına kampanya görünümü eklendi.
+- **feat**: Common Payment ekranındaki kart formuna bilgilendirme mesajı eklendi.
+- **feat**: Kayıtlı kart numarası ile işlemde kart kaydetme checkbox kaldırıldı.
+- **feat(log)**: Metric eventler eklendi.
+
 ### [1.1.3] - 2024-12-02
 
 - **feat(log)**: Page Load ve Payment Success işlemleri için metric eventleri eklendi.
