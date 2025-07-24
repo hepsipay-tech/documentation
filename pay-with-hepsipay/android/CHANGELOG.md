@@ -1,6 +1,10 @@
 PWHP
 Android
 
+### [1.2.1] - 2025-07-24
+
+- **fix**: Push doğrulama ekranında "SMS ile devam et" butonu, artık yalnızca geri sayım süresi dolduğunda görünecek şekilde düzenlendi.
+
 ### [1.2.0] - 2025-03-20
 
 - **feat**: Common Payment işlevi eklendi.
