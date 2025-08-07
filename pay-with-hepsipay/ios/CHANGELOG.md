@@ -1,5 +1,8 @@
 PWHP iOS
 
+[1.3.1] - 2025-08-07
+**fix**: Push doğrulama ekranında "SMS ile devam et" butonu, artık yalnızca geri sayım süresi dolduğunda görünecek şekilde düzenlendi.
+**fix**: Kampanya görünümlerinde HTML metin desteği eklendi.
 
 [1.3.0] - 2025-03-19
 **feat**: Non-Hb / Non-Hp akışları kullanıma açıldı.
